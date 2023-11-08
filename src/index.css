@@ -2,11 +2,15 @@
     padding: 0;
     margin: 0;
 }
+
+/* ====================
+Registration Page Start
+============ =========*/
 .regImage{
     height: 100vh;
     display: block;
-    width: 100%;
-    object-fit: cover;
+     width: 100%;
+    object-fit: cover; 
 }
 .regBox{
     width: 530px;
@@ -24,15 +28,8 @@
     font-size: 20px;
     font-weight: 400;
     color: #000000;
-    padding-top: 13px;
-    padding-bottom: 40px;
-}
-.MuiInputBase-input{
-    font-size: 20px !important;
-    font-weight: 600 !important;
-    font-family: 'Nunito', sans-serif !important;
-    color: #11175D !important;
-    
+    margin-top: 13px;
+    margin-bottom: 40px;
 }
 .paraTwo{
     font-family: 'Open Sans', sans-serif;
@@ -40,7 +37,7 @@
     font-weight: 700;
     color: #000000;
     margin-left: 70px;
-
+    
 }
 .paraTwo span{
     font-family: 'Open Sans', sans-serif;
@@ -50,3 +47,47 @@
     cursor: pointer;
     
 }
+.MuiInputBase-input{
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    font-family: 'Nunito', sans-serif !important;
+    color: #11175D !important;
+    
+}
+/* ====================
+Registration Page end
+============ =========*/
+/* ====================
+Login Page start
+============ =========*/
+
+.google{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+    align-items: center;
+    border: 1px solid rgba(105, 95, 95, 0.496);
+    padding: 15px 0px;
+    width: 50%;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    
+}
+.paraGoogle{
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+
+}
+.googleIcon{
+    font-size: 20px;
+}
+.unlink{
+    text-decoration: none;
+}
+/* ====================
+Login Page end
+============ =========*/

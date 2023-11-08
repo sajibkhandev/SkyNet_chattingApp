@@ -1,18 +1,27 @@
 import React from 'react'
+
+import Registration from './pages/Registration';
+import Login from './pages/Login';
+
 import {
   createRoutesFromElements,
   createBrowserRouter,
   Route,
   RouterProvider
 } from "react-router-dom";
-import Registration from './pages/Registration';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
+   <>
     <Route
       path="/"
       element={<Registration />}>
     </Route>
+    <Route
+      path="/login"
+      element={<Login />}>
+    </Route>
+   </>
   )
 );
 

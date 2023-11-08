@@ -6,6 +6,8 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { alpha, styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+
 
 const MyInput = styled(TextField) ({
     width: '70%',
@@ -32,7 +34,6 @@ const Registration = () => {
           <div className='regBox'>
             <h1 className='heading'>Get started with easily register</h1>
             <p className='para'>Free register and you can enjoy it</p>
-
             <div>
             <MyInput id="outlined-basic" label="Email Address" variant="outlined" />
             </div>
@@ -43,10 +44,7 @@ const Registration = () => {
             <MyInput type='password' id="outlined-basic" label="Password" variant="outlined" />
             </div>
             <MyButton variant="contained">Sign up</MyButton>
-            <p className='paraTwo'>Already  have an account ? <span>Sign In</span></p>
-           
-            
-
+            <p className='paraTwo'>Already  have an account ? <Link to='/login' className='unlink'><span>Sign In</span></Link></p>
           </div>
         </Grid>
         <Grid item xs={6}>
