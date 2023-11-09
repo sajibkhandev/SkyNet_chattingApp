@@ -1,12 +1,15 @@
-import React from 'react'
+import { useState } from 'react';
+
 
 import registrationImg from '../assets/registrationImg.png'
-
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { alpha, styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import {toast } from 'react-toastify';
+import Alert from '@mui/material/Alert';
+
 
 
 const MyInput = styled(TextField) ({
@@ -26,8 +29,35 @@ const MyInput = styled(TextField) ({
     textTransform:"capitalize"
   
   });
-
 const Registration = () => {
+
+  let [reginput,setRegInput]= useState({
+    email:"",
+    fullName:"",
+    password:""
+
+  })
+  let [error,setError]= useState({
+    emailError:"",
+    fullNameError:"",
+    passwordError:""
+
+  })
+  const handleInputAll=(e)=>{
+    setRegInput({...reginput,[e.target.name]:e.target.value});
+  
+   }
+   let handleSignUP=()=>{
+    if(error.emailError==""){
+      toast.error("Enter your Email")
+    }if(error.fullNameError==""){
+      toast.error("Enter Your Full Name")
+    }if(error.passwordError==""){
+      toast.error("Enter your Password")
+    }
+   
+   }
+   
   return (
         <Grid container >
         <Grid item xs={6}>
@@ -35,15 +65,20 @@ const Registration = () => {
             <h1 className='heading'>Get started with easily register</h1>
             <p className='para'>Free register and you can enjoy it</p>
             <div>
-            <MyInput id="outlined-basic" label="Email Address" variant="outlined" />
+            <MyInput name="email" onChange={handleInputAll} id="outlined-basic" label="Email Address" variant="outlined" />
+            
+            {/* {error.emailError&&<Alert severity="error">{error.emailError}</Alert>} */}
+            
             </div>
             <div>
-            <MyInput id="outlined-basic" label="Ful name" variant="outlined" />
+            <MyInput name="fullName" onChange={handleInputAll} id="outlined-basic" label="Ful name" variant="outlined" />
+            {/* {error.fullNameError&&<Alert severity="error">{error.fullNameError}</Alert>} */}
             </div>
             <div>
-            <MyInput type='password' id="outlined-basic" label="Password" variant="outlined" />
+            <MyInput name="password" onChange={handleInputAll} type='password' id="outlined-basic" label="Password" variant="outlined" />
+            {/* {error.passwordError&&<Alert severity="error">{error.passwordError}</Alert>} */}
             </div>
-            <MyButton variant="contained">Sign up</MyButton>
+            <MyButton onClick={handleSignUP} variant="contained">Sign up</MyButton>
             <p className='paraTwo'>Already  have an account ? <Link to='/login' className='unlink'><span>Sign In</span></Link></p>
           </div>
         </Grid>
