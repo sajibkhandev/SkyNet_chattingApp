@@ -6,15 +6,18 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { alpha, styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {toast } from 'react-toastify';
 import Alert from '@mui/material/Alert';
+import {BiSolidErrorCircle} from 'react-icons/bi'
+import { getAuth, createUserWithEmailAndPassword,sendEmailVerification,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { Dna } from 'react-loader-spinner'
+import {FcGoogle} from 'react-icons/fc'
 
 
 
 const MyInput = styled(TextField) ({
     width: '70%',
-    marginBottom:"34px"
     
   });
   const MyButton = styled(Button)({
@@ -30,33 +33,97 @@ const MyInput = styled(TextField) ({
   
   });
 const Registration = () => {
+  const auth = getAuth();
 
-  let [reginput,setRegInput]= useState({
-    email:"",
-    fullName:"",
-    password:""
+  let navigate =useNavigate()
 
-  })
-  let [error,setError]= useState({
-    emailError:"",
-    fullNameError:"",
-    passwordError:""
-
-  })
-  const handleInputAll=(e)=>{
-    setRegInput({...reginput,[e.target.name]:e.target.value});
+  let [loader,setLoader]=useState(false)
   
-   }
+  let [email,setEmail]=useState("")
+  let [fullName,setFullName]=useState("")
+  let [password,setPasswrd]=useState("")
+  let [emailError,setEmailError]=useState("")
+  let [fullNameError,setFullNameError]=useState("")
+  let [passwordError,setPasswrdError]=useState("")
+
+  let [emailIcon,setEmailIcon]=useState(false)
+  let [fullNameIcon,setFullNameIcon]=useState(false)
+  let [passwordIcon,setPasswordIcon]=useState(false)
+
+ 
+
+ 
+   let pattern=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+   let lowerChar=/^(?=.*[a-z])/
+   let upperChar=/^(?=.*[A-Z])/
+   let number=/^(?=.*[0-9])/
+   let specil=/^(?=.*[!@#$%^&*])/
+   let minMax=/^(?=.{8,})/
+
    let handleSignUP=()=>{
-    if(error.emailError==""){
-      toast.error("Enter your Email")
-    }if(error.fullNameError==""){
-      toast.error("Enter Your Full Name")
-    }if(error.passwordError==""){
-      toast.error("Enter your Password")
+    if(!email){
+      setEmailError("Enter your email");
+    }else if(!pattern.test(email)){
+      setEmailError("Enter a Valid Email");
+    }else if(!fullName){
+      setFullNameError("Enter YouFull Name");
+    }else if(!password){
+      setPasswrdError("Enter a password");
+    }else if(!lowerChar.test(password)){
+      setPasswrdError("Lower Case Must");
+    }else if(!upperChar.test(password)){
+      setPasswrdError("Upper Case Must");
+    }else if(!number.test(password)){
+      setPasswrdError("Number Must");
+    }else if(!specil.test(password)){
+      setPasswrdError("Specil charator Must");
+    }else if(!minMax.test(password)){
+      setPasswrdError("min-8 max-16");
     }
+    else{
+      setPasswrdError("");
+      setFullNameError("");
+      setEmailError("")
+      setLoader(true)
+      createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+       console.log(userCredential);
+       sendEmailVerification(auth.currentUser)
+       .then(() => {
+          setEmail("")
+          setPasswrd("")
+          setFullName("")
+          navigate('/login')
+
+          setLoader(false)
+     });
+       
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(errorCode);
+        setLoader(false)
+        if(errorCode.includes("email")){
+          setEmailError("Email already in use")
+        }
+      });
    
+    }
    }
+   let handleGoogleSignUp=()=>{
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then((result) => {
+      navigate("/home")
+      console.log(result);
+     
+    }).catch((error) => {
+      const errorCode = error.code;
+      console.log(errorCode);
+     
+    });
+
+   }
+  
+  
    
   return (
         <Grid container >
@@ -64,21 +131,48 @@ const Registration = () => {
           <div className='regBox'>
             <h1 className='heading'>Get started with easily register</h1>
             <p className='para'>Free register and you can enjoy it</p>
-            <div>
-            <MyInput name="email" onChange={handleInputAll} id="outlined-basic" label="Email Address" variant="outlined" />
-            
-            {/* {error.emailError&&<Alert severity="error">{error.emailError}</Alert>} */}
-            
+            <div onClick={handleGoogleSignUp} className='google1'>
+            <FcGoogle className='googleIcon'/>
+            <p className='paraGoogle'>Login with Google</p>
             </div>
-            <div>
-            <MyInput name="fullName" onChange={handleInputAll} id="outlined-basic" label="Ful name" variant="outlined" />
-            {/* {error.fullNameError&&<Alert severity="error">{error.fullNameError}</Alert>} */}
+            <div className='inputOne'>
+            <MyInput value={email} name="email" onChange={(e)=>setEmail(e.target.value)} id="outlined-basic" label="Email Address" variant="outlined" />
+            {/* {email&&<BiSolidErrorCircle className='regIcon'/>} */}
+            {emailError&&<Alert className='alertOne' severity="error">{emailError}</Alert>}
             </div>
-            <div>
-            <MyInput name="password" onChange={handleInputAll} type='password' id="outlined-basic" label="Password" variant="outlined" />
-            {/* {error.passwordError&&<Alert severity="error">{error.passwordError}</Alert>} */}
+            <div className='inputOne'>
+            <MyInput value={fullName} name="fullName" onChange={(e)=>setFullName(e.target.value)} id="outlined-basic" label="Ful name" variant="outlined" />
+            {/* {fullName&&<BiSolidErrorCircle className='regIcon'/>} */}
+            {fullNameError&&<Alert className='alertOne' severity="error">{fullNameError}</Alert>}
             </div>
+            <div className='inputOne'>
+            <MyInput value={password} name="password" onChange={(e)=>setPasswrd(e.target.value)} type='password' id="outlined-basic" label="Password" variant="outlined" />
+            {/* {password&&<BiSolidErrorCircle className='regIcon'/>} */}
+            {passwordError&&<Alert className='alertOne' severity="error">{passwordError}</Alert>}
+            </div>
+            {loader?
+           <button className='buttonForLoder'>
+           <Dna
+               visible={true}
+               height="60"
+               width="80"
+               ariaLabel="dna-loading"
+               wrapperStyle={{padding:'px 0px',
+               color:'red',
+               width:'100%',
+               borderRadius:"86px",
+               background:"wheat",
+               fontSize:'20px',
+               fontFamily:"Nunito",
+               fontWeight:"600",
+               textTransform:"capitalize"}}
+               wrapperClass="dna-wrapper"
+              />
+           </button>
+            :
             <MyButton onClick={handleSignUP} variant="contained">Sign up</MyButton>
+            }
+            
             <p className='paraTwo'>Already  have an account ? <Link to='/login' className='unlink'><span>Sign In</span></Link></p>
           </div>
         </Grid>

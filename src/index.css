@@ -14,7 +14,7 @@ Registration Page Start
 }
 .regBox{
     width: 530px;
-    margin-top: 150px;
+    margin-top: 130px;
     margin-left: auto;
 }
 .heading{
@@ -29,7 +29,7 @@ Registration Page Start
     font-weight: 400;
     color: #000000;
     margin-top: 13px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 .paraTwo{
     font-family: 'Open Sans', sans-serif;
@@ -48,11 +48,41 @@ Registration Page Start
     
 }
 .MuiInputBase-input{
-    font-size: 20px !important;
+    font-size: 18px !important;
     font-weight: 600 !important;
     font-family: 'Nunito', sans-serif !important;
     color: #11175D !important;
     
+}
+.inputOne{
+    position: relative;
+    padding-bottom: 26px;
+    
+
+}
+.regIcon{
+    color: #BE4B49;
+    font-size: 22px;
+    position: absolute;
+    top: 17px;
+    left: 337px;
+}
+.alertOne{
+    width: 64%;
+}
+.google1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+    align-items: center;
+    border: 1px solid rgba(105, 95, 95, 0.496);
+    padding: 15px 0px;
+    width: 50%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+
 }
 /* ====================
 Registration Page end
@@ -61,7 +91,7 @@ Registration Page end
 Login Page start
 ============ =========*/
 
-.google{
+.google2{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,6 +103,7 @@ Login Page start
     border-radius: 10px;
     margin-bottom: 50px;
     margin-top: 30px;
+    cursor: pointer;
     
 }
 .paraGoogle{
@@ -87,6 +118,14 @@ Login Page start
 }
 .unlink{
     text-decoration: none;
+}
+.buttonForLoder{
+    width: 70%;
+    border: 0px;
+    border-radius: 86px;
+    margin-bottom: 30px;
+    
+    
 }
 /* ====================
 Login Page end
@@ -104,3 +143,4 @@ Home Page start
 /* ====================
 Home Page end
 ============ =========*/
+
