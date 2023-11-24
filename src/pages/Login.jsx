@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import loginImg from '../assets/loginImg.png'
 import {FcGoogle} from 'react-icons/fc'
@@ -14,6 +14,8 @@ import Alert from '@mui/material/Alert'
 import {toast } from 'react-toastify';
 import { Dna } from 'react-loader-spinner'
 import { getAuth, signInWithEmailAndPassword,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { allUser } from '../slices/userSlice';
 
 const MyInput = styled(TextField) ({
     width: '70%',
@@ -34,7 +36,11 @@ const MyInput = styled(TextField) ({
   
 
 const Login = () => {
+  let dispatch=useDispatch()
   const auth = getAuth();
+  let activeUser=useSelector((state)=>(state.user.value))
+  console.log(activeUser);
+  
 
   let navigate =useNavigate()
 
@@ -76,6 +82,8 @@ const Login = () => {
       setLoader(true)
       signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
         console.log(userCredential);
+        dispatch(allUser(userCredential.user))
+        localStorage.setItem("user",JSON.stringify(userCredential.user))
         if(userCredential.user.emailVerified){
           setEmail("")
         setPasswrd("")
@@ -111,6 +119,12 @@ const Login = () => {
     });
 
    }
+   useEffect(()=>{
+    if(activeUser!=null){
+      navigate('/home')
+    }
+
+   },[])
   return (
     <Grid container >
     <Grid item xs={6}>
@@ -120,13 +134,16 @@ const Login = () => {
             <FcGoogle className='googleIcon'/>
             <p className='paraGoogle'>Login with Google</p>
             </div>
+            
             <div className='inputOne'>
             <MyInput onChange={(e)=>setEmail(e.target.value)} id="outlined-basic" label="Email Address" variant="outlined" />
-            {emailError&&<Alert className='alertOne' severity="error">{emailError}</Alert>}
+            {emailError&&<div className='error-box'><p>{emailError}</p></div>}
             </div>
+
             <div className='inputOne'>
             <MyInput onChange={(e)=>setPasswrd(e.target.value)} type='password' id="outlined-basic" label="Password" variant="outlined" />
-            {passwordError&&<Alert className='alertOne' severity="error">{passwordError}</Alert>}
+
+            {passwordError&&<div className='error-box'><p>{passwordError}</p></div>}
             </div>
             {loader?
              <button className='buttonForLoder'>
@@ -158,7 +175,6 @@ const Login = () => {
         <img className='regImage' src={loginImg} alt="loginImg" />
       </div>
     </Grid>
-   
   </Grid>
   )
 }

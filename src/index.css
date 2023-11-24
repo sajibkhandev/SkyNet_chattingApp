@@ -56,9 +56,42 @@ Registration Page Start
 }
 .inputOne{
     position: relative;
-    padding-bottom: 26px;
+    padding-bottom: 18px;
     
+}
+.error-box {
+    position: absolute;
+    background-color: #BE4B49;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width:240px;
+    padding: 16px;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    top: 130%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
 
+.error-box::before {
+    content: "";
+    position: absolute;
+    top: -16px;
+    left: 24px;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #BE4B49; /* Light blue background color */
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.error-box p{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
 }
 .regIcon{
     color: #BE4B49;
@@ -127,6 +160,7 @@ Login Page start
     
     
 }
+
 /* ====================
 Login Page end
 ============ =========*/
@@ -143,4 +177,10 @@ Home Page start
 /* ====================
 Home Page end
 ============ =========*/
+
+
+
+
+
+
 

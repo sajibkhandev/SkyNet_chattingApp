@@ -1,22 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { allUser } from '../slices/userSlice';
 
 const HomePage = () => {
+  let dispatch=useDispatch()
+  let navigate=useNavigate()
+  let activeUser=useSelector((state)=>state.user.value)
+ console.log(activeUser);
+  const auth = getAuth();
+  let handleLogOut=()=>{
+    signOut(auth).then(() => {
+      navigate('/login')
+      dispatch(allUser(null))
+      localStorage.removeItem("user")
+
+
+      
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+  useEffect(()=>{
+    if(activeUser==null){
+      navigate('/login')
+    }
+
+  },[])
   return (
-    <Grid container >
-    <Grid item xs={2}>
-      <div className='homebox1'>
-        <h3>+</h3>
-        <h3>+</h3>
-        <h3>+</h3>
-        <h3>+</h3>
-      </div>
-    </Grid>
-    <Grid item xs={10}>
-      <div>sdfsdf</div>
-    </Grid>
-    
-  </Grid>
+    <>
+      <Button onClick={handleLogOut} variant="contained">Log Out</Button>
+    </>
   )
 }
 

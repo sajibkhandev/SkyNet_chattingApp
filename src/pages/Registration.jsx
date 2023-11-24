@@ -16,6 +16,7 @@ import {FcGoogle} from 'react-icons/fc'
 
 
 
+
 const MyInput = styled(TextField) ({
     width: '70%',
     
@@ -65,9 +66,11 @@ const Registration = () => {
       setEmailError("Enter your email");
     }else if(!pattern.test(email)){
       setEmailError("Enter a Valid Email");
-    }else if(!fullName){
+    }
+    else if(!fullName){
       setFullNameError("Enter YouFull Name");
-    }else if(!password){
+    }
+    else if(!password){
       setPasswrdError("Enter a password");
     }else if(!lowerChar.test(password)){
       setPasswrdError("Lower Case Must");
@@ -86,14 +89,16 @@ const Registration = () => {
       setEmailError("")
       setLoader(true)
       createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-       console.log(userCredential);
+       console.log(userCredential.user);
+       
+
        sendEmailVerification(auth.currentUser)
        .then(() => {
           setEmail("")
           setPasswrd("")
           setFullName("")
           navigate('/login')
-
+          toast("Registration Successfull")
           setLoader(false)
      });
        
@@ -138,17 +143,17 @@ const Registration = () => {
             <div className='inputOne'>
             <MyInput value={email} name="email" onChange={(e)=>setEmail(e.target.value)} id="outlined-basic" label="Email Address" variant="outlined" />
             {/* {email&&<BiSolidErrorCircle className='regIcon'/>} */}
-            {emailError&&<Alert className='alertOne' severity="error">{emailError}</Alert>}
+            {emailError&&<div className='error-box'><p>{emailError}</p></div>}
             </div>
             <div className='inputOne'>
             <MyInput value={fullName} name="fullName" onChange={(e)=>setFullName(e.target.value)} id="outlined-basic" label="Ful name" variant="outlined" />
             {/* {fullName&&<BiSolidErrorCircle className='regIcon'/>} */}
-            {fullNameError&&<Alert className='alertOne' severity="error">{fullNameError}</Alert>}
+            {fullNameError&&<div className='error-box'><p>{fullNameError}</p></div>}
             </div>
             <div className='inputOne'>
             <MyInput value={password} name="password" onChange={(e)=>setPasswrd(e.target.value)} type='password' id="outlined-basic" label="Password" variant="outlined" />
             {/* {password&&<BiSolidErrorCircle className='regIcon'/>} */}
-            {passwordError&&<Alert className='alertOne' severity="error">{passwordError}</Alert>}
+            {passwordError&&<div className='error-box'><p>{passwordError}</p></div>}
             </div>
             {loader?
            <button className='buttonForLoder'>
