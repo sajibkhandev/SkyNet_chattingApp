@@ -12,6 +12,10 @@ import {
   RouterProvider
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
+import RootLayouts from './components/RootLayouts';
+import Message from './pages/Message';
+import Notification from './pages/Notification';
+import Settiing from './pages/Settiing';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,8 +29,24 @@ const router = createBrowserRouter(
       element={<Login />}>
     </Route>
     <Route
-      path="/home"
-      element={<HomePage />}>
+      path="/pages"
+      element={<RootLayouts />}>
+        <Route
+        path="home"
+        element={<HomePage />}>
+        </Route>
+        <Route
+        path="message"
+        element={<Message />}>
+        </Route>
+        <Route
+        path="notification"
+        element={<Notification />}>
+        </Route>
+        <Route
+        path="setting"
+        element={<Settiing />}>
+        </Route>
     </Route>
    </>
   )

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 import registrationImg from '../assets/registrationImg.png'
@@ -13,6 +13,9 @@ import {BiSolidErrorCircle} from 'react-icons/bi'
 import { getAuth, createUserWithEmailAndPassword,sendEmailVerification,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Dna } from 'react-loader-spinner'
 import {FcGoogle} from 'react-icons/fc'
+import { useDispatch, useSelector } from 'react-redux';
+import { loginData } from '../slices/userSlice';
+
 
 
 
@@ -34,7 +37,11 @@ const MyInput = styled(TextField) ({
   
   });
 const Registration = () => {
-  const auth = getAuth();
+  const auth = getAuth(); 
+  let dispatch=useDispatch()
+  let data=useSelector((state)=>(state.sajib.value))
+  
+  
 
   let navigate =useNavigate()
 
@@ -89,8 +96,6 @@ const Registration = () => {
       setEmailError("")
       setLoader(true)
       createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-       console.log(userCredential.user);
-       
 
        sendEmailVerification(auth.currentUser)
        .then(() => {
@@ -118,7 +123,11 @@ const Registration = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((result) => {
       navigate("/home")
-      console.log(result);
+      dispatch(loginData(result.user))
+      localStorage.setItem("user",JSON.stringify(result.user))
+      
+      console.log(result.user);
+      di
      
     }).catch((error) => {
       const errorCode = error.code;
@@ -127,9 +136,12 @@ const Registration = () => {
     });
 
    }
-  
-  
-   
+  //  useEffect(()=>{
+  //  if(data!=null){
+  //   navigate("/home")
+  //  }
+
+  //  },[])
   return (
         <Grid container >
         <Grid item xs={6}>

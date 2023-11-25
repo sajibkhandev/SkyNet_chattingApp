@@ -160,7 +160,38 @@ Login Page start
     
     
 }
+.forgetPassword{
+    margin-left: 86px;
+    margin-bottom: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #11175D;
+    cursor: pointer;
+}
+.recoverpassword{
+    width: 200px;
+    padding: 12px 20px !important;
+    margin: 0px auto !important;
+    cursor: pointer !important;
+    display: flex !important;
+}
+.recover{
+    margin: 0px auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    font-size: 30px !important;
+    font-weight: 500 !important;
+    color: #11175D !important;
 
+}
+.recoverinput{
+    margin: 0px auto !important;
+    display: flex !important;
+    margin-top: 30px !important;
+    
+
+}
 /* ====================
 Login Page end
 ============ =========*/
@@ -169,10 +200,71 @@ Login Page end
 Home Page start
 ============ =========*/
 
-.homebox1{
+
+.sideber{
     background: #5F35F5;
-    height: 100vh;
-   
+    height: 95vh;
+    border-radius: 20px;
+    width: 186px;
+    margin: 18px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 80px;
+    
+}
+.mainProfile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.sideIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 46px;
+    font-size: 40px;
+    margin-top: 50px;
+}
+.commonIcon{
+    color: white;
+}
+.logoutIcon{
+    font-size: 40px;
+    color:white ;
+
+}
+.active{
+    position: relative;
+    z-index: 1;
+}
+.active .commonIcon{
+    color: #5F35F5;
+}
+.active:after {
+    width: 150px;
+    height: 75px;
+    background: white;
+    position: absolute;
+    top: -14px;
+    left: -37px;
+    content: "";
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    z-index: -1;
+}
+.active:before {
+    width: 8px;
+    height: 75px;
+    background: #5F35F5;
+    position: absolute;
+    top: -14px;
+    left: 105px;
+    content: "";
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 /* ====================
 Home Page end

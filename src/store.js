@@ -3,6 +3,7 @@ import userSlice from './slices/userSlice'
 
 export default configureStore({
   reducer: {
-    user:userSlice,
+    sajib:userSlice
+   
   },
 })
