@@ -136,12 +136,12 @@ const Registration = () => {
     });
 
    }
-  //  useEffect(()=>{
-  //  if(data!=null){
-  //   navigate("/home")
-  //  }
+   useEffect(()=>{
+   if(data!=null){
+    navigate("/home")
+   }
 
-  //  },[])
+   },[])
   return (
         <Grid container >
         <Grid item xs={6}>

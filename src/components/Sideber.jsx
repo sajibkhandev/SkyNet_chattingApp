@@ -16,6 +16,7 @@ const Sideber = () => {
     let navigate=useNavigate()
     let dispatch=useDispatch()
     let data=useSelector((state)=>(state.sajib.value))
+    let pathname=window.location.pathname.replace("/","")
 
     let handleLogOut=()=>{
         signOut(auth).then(() => {
@@ -25,27 +26,28 @@ const Sideber = () => {
           // Sign-out successful.
         })
       }
-    //   useEffect(()=>{
-    //     if(data==null){
-    //       navigate("/login")
-    //     }
-    //   },[])
+      useEffect(()=>{
+        if(data==null){
+          navigate("/login")
+        }
+      },[])
+    
     
   return (
     <div className='sideber'>
         <div>
         <img src={profile} alt="" className='mainProfile'/>
         <div className='sideIcon'>
-            <Link to='/pages/home' className='active'>
+            <Link to='/home' className={`${pathname=="home"&&"active"}`}>
             <IoHomeOutline  className='commonIcon'/>
             </Link>
-            <Link to='/pages/message'>
+            <Link to='/message' className={`${pathname=="message"&&"active"}`}>
             <AiOutlineMessage  className='commonIcon'/>
             </Link>
-            <Link to='/pages/notification'>
+            <Link to='/notification' className={`${pathname=="notification"&&"active"}`}>
             <IoMdNotificationsOutline  className='commonIcon'/>
             </Link>
-            <Link to='/pages/setting'>
+            <Link to='/setting' className={`${pathname=="setting"&&"active"}`}>
             <IoSettingsOutline  className='commonIcon'/>
             </Link>
         </div>

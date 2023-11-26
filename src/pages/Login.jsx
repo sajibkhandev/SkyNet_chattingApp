@@ -147,12 +147,12 @@ const Login = () => {
     });
 
    }
-  //  useEffect(()=>{
-  //   if(data!=null){
-  //     navigate('/home')
-  //   }
+   useEffect(()=>{
+    if(data!=null){
+      navigate('/home')
+    }
 
-  //  },[])
+   },[])
 
    let handleSend=()=>{
     

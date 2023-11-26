@@ -29,7 +29,7 @@ const router = createBrowserRouter(
       element={<Login />}>
     </Route>
     <Route
-      path="/pages"
+      path="/"
       element={<RootLayouts />}>
         <Route
         path="home"
