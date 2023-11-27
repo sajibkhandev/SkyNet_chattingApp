@@ -2,12 +2,18 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import userProfile1 from '../assets/userProfile1.png'
 import { BsThreeDotsVertical } from "react-icons/bs";
-import Search from './Search';
+import { CiSearch } from "react-icons/ci";
 
 const Friends = () => {
   return (
     <>
-    <Search/>
+   {/* Search portion */}
+   <div className='searchDiv'>
+    <input className='search' type="text" placeholder='Search'/>
+    <CiSearch className='searchIcon'/> 
+    <BsThreeDotsVertical  className='threedotIcon'/>
+    </div>
+   {/* Search portion */}
     <div className='box'>
         <div className='commonHeading'>
             <h4>Friends</h4>

@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginData } from '../slices/userSlice';
 
 import { getDatabase, ref, set,  } from "firebase/database";
+import { LuEye } from "react-icons/lu";
+import { LuEyeOff } from "react-icons/lu";
 
 
 
@@ -56,6 +58,9 @@ const Registration = () => {
   let [emailError,setEmailError]=useState("")
   let [fullNameError,setFullNameError]=useState("")
   let [passwordError,setPasswrdError]=useState("")
+
+  let [eye,setEye]=useState(false)
+  let [type,setType]=useState(false)
 
   let [emailIcon,setEmailIcon]=useState(false)
   let [fullNameIcon,setFullNameIcon]=useState(false)
@@ -106,7 +111,7 @@ const Registration = () => {
         set(ref(db, 'all user/'+userCredential.user.uid), {
           username: fullName,
           email: userCredential.user.email,
-          profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profilePictureAvater.png?alt=media&token=dde55997-2e82-435f-9c1d-a67035e76531"
+          profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
         });
           setEmail("")
           setPasswrd("")
@@ -135,7 +140,7 @@ const Registration = () => {
       set(ref(db, 'all user/' + result.user.uid), {
         username: result.user.displayName,
         email: result.user.email,
-        profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profilePictureAvater.png?alt=media&token=dde55997-2e82-435f-9c1d-a67035e76531"
+        profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
       });
       navigate("/home")
       dispatch(loginData(result.user))
@@ -150,12 +155,23 @@ const Registration = () => {
     });
 
    }
+
+   let handleEyeOne=()=>{
+    setEye(true)
+    setType(true)
+   }
+   let handleEyeTwo=()=>{
+    setEye(false)
+    setType(false)
+   }
+   
    useEffect(()=>{
    if(data!=null){
     navigate("/home")
    }
 
    },[])
+  
   return (
         <Grid container >
         <Grid item xs={6}>
@@ -177,9 +193,14 @@ const Registration = () => {
             {fullNameError&&<div className='error-box'><p>{fullNameError}</p></div>}
             </div>
             <div className='inputOne'>
-            <MyInput value={password} name="password" onChange={(e)=>setPasswrd(e.target.value)} type='password' id="outlined-basic" label="Password" variant="outlined" />
+            <MyInput value={password} name="password" onChange={(e)=>setPasswrd(e.target.value)} type={type?"text":"password"} id="outlined-basic" label="Password" variant="outlined" />
             {/* {password&&<BiSolidErrorCircle className='regIcon'/>} */}
             {passwordError&&<div className='error-box'><p>{passwordError}</p></div>}
+            {eye?
+            <LuEyeOff onClick={handleEyeTwo}   className='eye'/>
+            :
+            <LuEye onClick={handleEyeOne}  className='eye'/>
+            }
             </div>
             {loader?
            <button className='buttonForLoder'>
