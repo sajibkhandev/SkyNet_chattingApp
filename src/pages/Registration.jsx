@@ -16,6 +16,8 @@ import {FcGoogle} from 'react-icons/fc'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginData } from '../slices/userSlice';
 
+import { getDatabase, ref, set,  } from "firebase/database";
+
 
 
 
@@ -37,6 +39,7 @@ const MyInput = styled(TextField) ({
   
   });
 const Registration = () => {
+  const db = getDatabase();
   const auth = getAuth(); 
   let dispatch=useDispatch()
   let data=useSelector((state)=>(state.sajib.value))
@@ -96,9 +99,15 @@ const Registration = () => {
       setEmailError("")
       setLoader(true)
       createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        console.log(userCredential.user.uid);
 
        sendEmailVerification(auth.currentUser)
        .then(() => {
+        set(ref(db, 'all user/'+userCredential.user.uid), {
+          username: fullName,
+          email: userCredential.user.email,
+          profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profilePictureAvater.png?alt=media&token=dde55997-2e82-435f-9c1d-a67035e76531"
+        });
           setEmail("")
           setPasswrd("")
           setFullName("")
@@ -122,12 +131,17 @@ const Registration = () => {
    let handleGoogleSignUp=()=>{
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((result) => {
+      
+      set(ref(db, 'all user/' + result.user.uid), {
+        username: result.user.displayName,
+        email: result.user.email,
+        profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profilePictureAvater.png?alt=media&token=dde55997-2e82-435f-9c1d-a67035e76531"
+      });
       navigate("/home")
       dispatch(loginData(result.user))
       localStorage.setItem("user",JSON.stringify(result.user))
       
-      console.log(result.user);
-      di
+      
      
     }).catch((error) => {
       const errorCode = error.code;

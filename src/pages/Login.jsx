@@ -19,6 +19,7 @@ import { Dna } from 'react-loader-spinner'
 import { getAuth, signInWithEmailAndPassword,signInWithPopup, GoogleAuthProvider,sendPasswordResetEmail  } from "firebase/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginData } from '../slices/userSlice';
+import { getDatabase, ref, set } from "firebase/database";
 
 
 const MyInput = styled(TextField) ({
@@ -51,6 +52,7 @@ const MyInput = styled(TextField) ({
   
 
 const Login = () => {
+  const db = getDatabase();
   const auth = getAuth();
   let dispatch=useDispatch()
   let data=useSelector((state)=>(state.sajib.value))
@@ -135,6 +137,11 @@ const Login = () => {
    let handleGoogleSignIn=()=>{
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((result) => {
+      set(ref(db, 'all user/' + result.user.uid), {
+        username: result.user.displayName,
+        email: result.user.email,
+        profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profilePictureAvater.png?alt=media&token=dde55997-2e82-435f-9c1d-a67035e76531"
+      });
       navigate('/home')
       dispatch(loginData(result.user))
       localStorage.setItem("user",JSON.stringify(result.user))

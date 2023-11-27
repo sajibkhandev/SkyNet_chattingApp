@@ -2,9 +2,12 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import userProfile1 from '../assets/userProfile1.png'
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Search from './Search';
 
 const BlockedUsers = () => {
   return (
+    <>
+    <Search/>
     <div className='box box2'>
         <div className='commonHeading'>
             <h4>Blocked Users</h4>
@@ -66,6 +69,7 @@ const BlockedUsers = () => {
        </div>
 
     </div>
+    </>
   )
 }
 

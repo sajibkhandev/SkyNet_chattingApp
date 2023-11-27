@@ -3,10 +3,14 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import userProfile1 from '../assets/userProfile1.png'
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Search from './Search';
+
 
 const GroupsList = () => {
   return (
-    <div className='box'>
+      <>
+      <Search/>
+      <div className='box'>
         <div className='commonHeading'>
             <h4>Groups List</h4>
             <BsThreeDotsVertical />
@@ -67,6 +71,7 @@ const GroupsList = () => {
        </div>
 
     </div>
+      </>
   )
 }
 

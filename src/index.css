@@ -270,12 +270,12 @@ Home Page start
     height: 95vh;
 }
 .box{
-    margin-top: 18px;
+    /* margin-top: 8px; */
     border-radius: 10px;
     -webkit-box-shadow: 0px 9px 10px 0px rgba(0,0,0,0.09);
     -moz-box-shadow: 0px 9px 10px 0px rgba(0,0,0,0.09);
     box-shadow: 0px 9px 10px 0px rgba(0,0,0,0.09);
-    height: 49%;
+    height: 43%;
 }
 .box2{
     margin-right: 10px;
@@ -283,7 +283,7 @@ Home Page start
 .scroll{
     overflow-y: scroll;
     /* height: 286px; */
-    height: 84%;
+    height: 82%;
 }
 .commonHeading{
     display: flex;
@@ -304,8 +304,8 @@ Home Page start
 }
 
 .userProfileCommon{
-    width: 70px;
-    height: 70px;
+    width: 63px;
+    height: 63px;
     border-radius: 50%;
 }
 
@@ -314,7 +314,7 @@ Home Page start
     justify-content: space-between;
     align-items: center;
     margin: 0px 20px;
-    padding: 13px 0px;
+    padding: 9px 0px;
     border-bottom: 1px solid #cfcfcf;
 }
 .main:last-child{
@@ -338,12 +338,43 @@ Home Page start
     color: #4D4D4D;
 }
 
-.button{
-    padding: 0px 22px !important;
+.button {
+    padding: 0px 20px !important;
     background: #5F35F5 !important;
     font-family: 'Poppins', sans-serif !important;
-    font-size: 18px !important;
+    font-size: 16px !important;
     font-weight: 500 !important;
+}
+
+.searchDiv{
+    position: relative;
+    width: 285px;
+    display: flex;;
+    margin: auto;
+    
+
+}
+.search{
+    width: 100%;
+    padding: 12px 55px;
+    margin-top: 15px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 9px 10px 0px rgba(0,0,0,0.09);
+    -moz-box-shadow: 0px 9px 10px 0px rgba(0,0,0,0.09);
+    box-shadow: 0px 9px 10px 0px rgba(0,0,0,0.09);
+    border: 0px;
+}
+.searchIcon {
+    position: absolute;
+    bottom: 13px;
+    left: 26px;
+}
+.threedotIcon {
+    position: absolute;
+    bottom: 13px;
+    right: 20px;
+    font-size: 14px;
+    color: #635d5d;
 }
 /* ====================
 Home Page end

@@ -2,9 +2,12 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import userProfile1 from '../assets/userProfile1.png'
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Search from '../components/Search'
 
 const MyGroups = () => {
   return (
+    <>
+    <Search/>
     <div className='box'>
         <div className='commonHeading'>
             <h4>My Groups</h4>
@@ -66,6 +69,7 @@ const MyGroups = () => {
        </div>
 
     </div>
+    </>
   )
 }
 
