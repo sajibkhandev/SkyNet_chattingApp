@@ -144,7 +144,7 @@ const Registration = () => {
       });
       navigate("/home")
       dispatch(loginData(result.user))
-      localStorage.setItem("user",JSON.stringify(result.user))
+      localStorage.setItem("activeUser",JSON.stringify(result.user))
       
       
      

@@ -190,6 +190,13 @@ Login Page start
     display: flex !important;
     margin-top: 30px !important;
 }
+.recoverError{
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 18px;
+    color: rgb(208, 22, 22);
+    font-weight: 500;
+}
 /* ====================
 Login Page end
 ============ =========*/

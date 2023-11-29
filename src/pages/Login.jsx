@@ -75,6 +75,7 @@ const Login = () => {
   let [condition,setCondition]=useState(false)
   let [eye,setEye]=useState(false)
   let [type,setType]=useState(false)
+  let [recoverError,setRecoverError]=useState("")
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -114,7 +115,7 @@ const Login = () => {
       signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
         // console.log(userCredential);
         dispatch(loginData(userCredential.user))
-        localStorage.setItem("user",JSON.stringify(userCredential.user))
+        localStorage.setItem("activeUser",JSON.stringify(userCredential.user))
         
         if(userCredential.user.emailVerified){
           setEmail("")
@@ -148,7 +149,7 @@ const Login = () => {
       });
       navigate('/home')
       dispatch(loginData(result.user))
-      localStorage.setItem("user",JSON.stringify(result.user))
+      localStorage.setItem("activeUser",JSON.stringify(result.user))
       console.log(result.user);
       
     }).catch((error) => {
@@ -159,12 +160,18 @@ const Login = () => {
 
    }
    let handleSend=()=>{
-    
-    setLoader2(true)
+    if(!recoverEmail){
+      setRecoverError("Please Enter Your Email !");
+    }else if(!pattern.test(recoverEmail)){
+      setRecoverError("Enter Your Vaild Email !");
+    }else{
+      setRecoverError("")
+      setLoader2(true)
     sendPasswordResetEmail(auth,recoverEmail)
   .then(() => {
     setLoader2(false)
     setCondition(false)
+    toast("Please Check Your Email")
     // Password reset email sent!
     // ..
   })
@@ -176,6 +183,7 @@ const Login = () => {
     
   });
 
+    }
    }
    let handleEyeOne=()=>{
     setEye(true)
@@ -220,7 +228,7 @@ const Login = () => {
             </div>
             {/* Desigin */}
             <h3 onClick={handleOpen} className='forgetPassword'>Forget Your Password?</h3>
-            {condition&&<Modal
+            <Modal
                      open={open}
                      onClose={handleClose}
                      aria-labelledby="modal-modal-title"
@@ -234,6 +242,7 @@ const Login = () => {
                        <div className='inputOne'>
                        <MyInput onChange={(e)=>setRecoverEmail(e.target.value)} className='recoverinput'  id="outlined-basic" label="Enter Your Email " variant="outlined" />
                        </div>
+                       <h3 className='recoverError'>{recoverError}</h3>
                        {loader2?
                        <button className='buttonForLoder'>
                        <Dna
@@ -259,7 +268,7 @@ const Login = () => {
                          
                        </Typography>
                      </Box>
-             </Modal>}
+             </Modal>
             
             {/* Desigin */}
             {loader?

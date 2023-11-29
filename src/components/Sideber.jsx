@@ -22,7 +22,7 @@ const Sideber = () => {
         signOut(auth).then(() => {
           navigate('/login')
           dispatch(loginData(null))
-          localStorage.removeItem("user")
+          localStorage.removeItem("activeUser")
           // Sign-out successful.
         })
       }
