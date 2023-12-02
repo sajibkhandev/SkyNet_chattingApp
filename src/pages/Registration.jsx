@@ -10,7 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {toast } from 'react-toastify';
 import Alert from '@mui/material/Alert';
 import {BiSolidErrorCircle} from 'react-icons/bi'
-import { getAuth, createUserWithEmailAndPassword,sendEmailVerification,signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,sendEmailVerification,signInWithPopup, GoogleAuthProvider,updateProfile  } from "firebase/auth";
 import { Dna } from 'react-loader-spinner'
 import {FcGoogle} from 'react-icons/fc'
 import { useDispatch, useSelector } from 'react-redux';
@@ -105,8 +105,10 @@ const Registration = () => {
       setLoader(true)
       createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
         console.log(userCredential.user.uid);
-
-       sendEmailVerification(auth.currentUser)
+        updateProfile(auth.currentUser, {
+          displayName: fullName, photoURL: "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
+        }).then(() => {
+          sendEmailVerification(auth.currentUser)
        .then(() => {
         set(ref(db, 'all user/'+userCredential.user.uid), {
           username: fullName,
@@ -121,6 +123,9 @@ const Registration = () => {
           setLoader(false)
      });
        
+        })
+
+       
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -133,21 +138,24 @@ const Registration = () => {
    
     }
    }
+
+
    let handleGoogleSignUp=()=>{
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((result) => {
-      
-      set(ref(db, 'all user/' + result.user.uid), {
-        username: result.user.displayName,
-        email: result.user.email,
-        profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
-      });
-      navigate("/home")
-      dispatch(loginData(result.user))
-      localStorage.setItem("activeUser",JSON.stringify(result.user))
-      
-      
-     
+      console.log(result.user.displayName);
+      updateProfile(auth.currentUser, {
+         photoURL: "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
+      }).then(() => {
+        set(ref(db, 'all user/' + result.user.uid), {
+          username: result.user.displayName,
+          email: result.user.email,
+          profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
+        });
+        navigate("/home")
+        dispatch(loginData(result.user))
+        localStorage.setItem("activeUser",JSON.stringify(result.user))
+      })
     }).catch((error) => {
       const errorCode = error.code;
       console.log(errorCode);

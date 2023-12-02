@@ -4,6 +4,7 @@ import userProfile1 from '../assets/userProfile1.png'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { CiSearch } from "react-icons/ci";
+import { useSelector } from 'react-redux';
 
 
 const UserList = () => {
@@ -11,13 +12,16 @@ const UserList = () => {
     let [allUser,setAllUser]=useState([])
     let [search,setSearch]=useState([])
     let [input,setInput]=useState("")
+    let data=useSelector((state)=>state.sajib.value)
 
     useEffect(()=>{
         const starCountRef = ref(db, 'all user');
         onValue(starCountRef, (snapshot) => {
             let arr=[]
             snapshot.forEach(item=>{
-                arr.push(item.val());
+                if(data.uid!=item.key){
+                    arr.push(item.val());
+                } 
             })
             setAllUser(arr)
       });
@@ -27,7 +31,6 @@ const UserList = () => {
         let result= allUser.filter(item=>item.username.toLowerCase().includes(e.target.value.toLowerCase()))
         setSearch(result);
     }
-
   return (
    <>
    {/* Search portion */}
