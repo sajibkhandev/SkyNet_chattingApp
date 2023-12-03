@@ -143,19 +143,15 @@ const Login = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((result) => {
       console.log(result.user);
-      updateProfile(auth.currentUser, {
-         photoURL: "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
-      }).then(() => {
-        set(ref(db, 'all user/' + result.user.uid), {
-          username: result.user.displayName,
-          email: result.user.email,
-          profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
-        });
-        navigate('/home')
-        dispatch(loginData(result.user))
-        localStorage.setItem("activeUser",JSON.stringify(result.user))
-        console.log(result.user);
-      })
+      set(ref(db, 'all user/' + result.user.uid), {
+        username: result.user.displayName,
+        email: result.user.email,
+        profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
+      });
+      navigate('/home')
+      dispatch(loginData(result.user))
+      localStorage.setItem("activeUser",JSON.stringify(result.user))
+      console.log(result.user);
      
       
     }).catch((error) => {

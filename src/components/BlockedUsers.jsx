@@ -26,50 +26,46 @@ const BlockedUsers = () => {
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
                     <div>
                         <h5>Friends Reunion</h5>
-                        <p>Hi Guys, Wassup!</p>
+                        <p className='time'>Today, 8:56pm</p>
                     </div>
                     </div>
-                    <Button className='button' variant="contained">Join</Button>
+                    <Button className='button button2' variant="contained">unblock</Button>
             </div>
+        {/* more user */}
+        {/* more user */}
             <div className='main'>
                     <div className='pain'>
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
                     <div>
                         <h5>Friends Reunion</h5>
-                        <p>Hi Guys, Wassup!</p>
+                        <p className='time'>Today, 8:56pm</p>
                     </div>
                     </div>
-                    <Button className='button' variant="contained">Join</Button>
+                    <Button className='button button2' variant="contained">unblock</Button>
             </div>
+        {/* more user */}
+        {/* more user */}
             <div className='main'>
                     <div className='pain'>
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
                     <div>
                         <h5>Friends Reunion</h5>
-                        <p>Hi Guys, Wassup!</p>
+                        <p className='time'>Today, 8:56pm</p>
                     </div>
                     </div>
-                    <Button className='button' variant="contained">Join</Button>
+                    <Button className='button button2' variant="contained">unblock</Button>
             </div>
+        {/* more user */}
+        {/* more user */}
             <div className='main'>
                     <div className='pain'>
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
                     <div>
                         <h5>Friends Reunion</h5>
-                        <p>Hi Guys, Wassup!</p>
+                        <p className='time'>Today, 8:56pm</p>
                     </div>
                     </div>
-                    <Button className='button' variant="contained">Join</Button>
-            </div>
-            <div className='main'>
-                    <div className='pain'>
-                    <img src={userProfile1} alt=""  className='userProfileCommon'/>
-                    <div>
-                        <h5>Friends Reunion</h5>
-                        <p>Hi Guys, Wassup!</p>
-                    </div>
-                    </div>
-                    <Button className='button' variant="contained">Join</Button>
+                    <Button className='button button2' variant="contained">unblock</Button>
             </div>
         {/* more user */}
        </div>

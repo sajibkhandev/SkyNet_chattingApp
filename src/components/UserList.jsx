@@ -55,7 +55,7 @@ const UserList = () => {
         <img src={item.profile_picture} alt=""  className='userProfileCommon'/>
         <div>
             <h5>{item.username.substring(0,14)}</h5>
-            <p>Hi Guys, Wassup!</p>
+            <p className='time'>Today, 8:56pm</p>
         </div>
         </div>
         <Button className='button' variant="contained">+</Button>
@@ -70,7 +70,7 @@ const UserList = () => {
         <img src={item.profile_picture} alt=""  className='userProfileCommon'/>
         <div>
             <h5>{item.username.substring(0,14)}</h5>
-            <p>Hi Guys, Wassup!</p>
+            <p className='userTime'>Today, 8:56pm</p>
         </div>
         </div>
         <Button className='button' variant="contained">+</Button>

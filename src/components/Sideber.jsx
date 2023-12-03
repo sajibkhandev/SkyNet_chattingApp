@@ -40,6 +40,8 @@ const Sideber = () => {
     let dispatch=useDispatch()
     let data=useSelector((state)=>(state.sajib.value))
     let pathname=window.location.pathname.replace("/","")
+    
+    
 
     const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -65,11 +67,7 @@ const Sideber = () => {
           // Sign-out successful.
         })
       }
-      useEffect(()=>{
-        if(data==null){
-          navigate("/login")
-        }
-      },[])
+     
 
       const onChange = (e) => {
         e.preventDefault();
@@ -102,6 +100,7 @@ const Sideber = () => {
                 setLoader(false)
                 setModal(false)
               })
+              
             });
           });
         }
@@ -110,6 +109,12 @@ const Sideber = () => {
       let getDataCancel=()=>{
         setImage("")
       }
+
+      useEffect(()=>{
+        if(data==null){
+          navigate("/login")
+        }
+      },[])
     
     
   return (
@@ -178,14 +183,17 @@ const Sideber = () => {
               fontSize:'20px',
               fontFamily:"Nunito",
               fontWeight:"600",
-              textTransform:"capitalize"}}
+              textTransform:"capitalize",
+              marginTop:"40px",
+              marginLeft:"60px"
+            }}
               wrapperClass="dna-wrapper"
              />
           </button>
         :
-        <div>
-          <Button onClick={getCropData} variant="contained">Upload</Button>
+        <div className="uploadButton">
         <Button onClick={getDataCancel} variant="contained">Cancel</Button>
+          <Button onClick={getCropData} variant="contained">Upload</Button>
         </div>
       )}
         

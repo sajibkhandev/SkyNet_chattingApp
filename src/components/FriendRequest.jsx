@@ -29,8 +29,10 @@ const FriendRequest = () => {
                         <p>Hi Guys, Wassup!</p>
                     </div>
                     </div>
-                    <Button className='button' variant="contained">Join</Button>
+                    <Button className='button button2' variant="contained">Accept</Button>
             </div>
+        {/* more user */}
+        {/* more user */}
             <div className='main'>
                     <div className='pain'>
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
@@ -39,8 +41,10 @@ const FriendRequest = () => {
                         <p>Hi Guys, Wassup!</p>
                     </div>
                     </div>
-                    <Button className='button' variant="contained">Join</Button>
+                    <Button className='button button2' variant="contained">Accept</Button>
             </div>
+        {/* more user */}
+        {/* more user */}
             <div className='main'>
                     <div className='pain'>
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
@@ -49,8 +53,10 @@ const FriendRequest = () => {
                         <p>Hi Guys, Wassup!</p>
                     </div>
                     </div>
-                    <Button className='button' variant="contained">Join</Button>
+                    <Button className='button button2' variant="contained">Accept</Button>
             </div>
+        {/* more user */}
+        {/* more user */}
             <div className='main'>
                     <div className='pain'>
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
@@ -59,8 +65,10 @@ const FriendRequest = () => {
                         <p>Hi Guys, Wassup!</p>
                     </div>
                     </div>
-                    <Button className='button' variant="contained">Join</Button>
+                    <Button className='button button2' variant="contained">Accept</Button>
             </div>
+        {/* more user */}
+        {/* more user */}
             <div className='main'>
                     <div className='pain'>
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
@@ -69,7 +77,7 @@ const FriendRequest = () => {
                         <p>Hi Guys, Wassup!</p>
                     </div>
                     </div>
-                    <Button className='button' variant="contained">Join</Button>
+                    <Button className='button button2' variant="contained">Accept</Button>
             </div>
         {/* more user */}
        </div>

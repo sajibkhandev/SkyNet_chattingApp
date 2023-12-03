@@ -157,6 +157,7 @@ Login Page start
     border: 0px;
     border-radius: 86px;
     margin-bottom: 30px;
+    background:white !important;
     
     
 }
@@ -362,6 +363,28 @@ Home Page start
     font-weight: 500 ;
     color: #4D4D4D;
 }
+.paraTwo{
+    font-size: 12px !important;
+    font-family: 'Poppins', sans-serif  !important;
+    font-weight: 500  !important;
+    color: #4D4D4D !important;
+
+}
+.userTime{
+    font-family: 'Poppins', sans-serif!important ;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    color: #4D4D4D!important;
+   
+
+}
+.time{
+    font-size: 10px  !important;
+    font-family: 'Poppins', sans-serif  !important;
+    font-weight: 500 !important ;
+    color: #4D4D4D !important;
+
+}
 
 .button {
     padding: 0px 20px !important;
@@ -370,7 +393,15 @@ Home Page start
     font-size: 16px !important;
     font-weight: 500 !important;
 }
-
+.button2{
+    padding: 0px 6px !important;
+}
+.uploadButton{
+    margin-top: 20px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
 .searchDiv{
     position: relative;
     width: 285px;
