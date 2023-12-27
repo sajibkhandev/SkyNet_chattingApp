@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Button from '@mui/material/Button';
 import userProfile1 from '../assets/userProfile1.png'
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue,set,push } from "firebase/database";
 import { CiSearch } from "react-icons/ci";
 import { useSelector } from 'react-redux';
 
@@ -20,7 +20,7 @@ const UserList = () => {
             let arr=[]
             snapshot.forEach(item=>{
                 if(data.uid!=item.key){
-                    arr.push(item.val());
+                    arr.push({...item.val(),userid:item.key});
                 } 
             })
             setAllUser(arr)
@@ -31,6 +31,16 @@ const UserList = () => {
         let result= allUser.filter(item=>item.username.toLowerCase().includes(e.target.value.toLowerCase()))
         setSearch(result);
     }
+
+    let handleAddFriend=(item)=>{
+         set(push(ref(db, 'friendRequest/')), {
+            senderName:data.displayName,
+            senderId:data.uid,
+            reciverName:item.username,
+            reciverId:item.userid
+  });
+    }
+    
   return (
    <>
    {/* Search portion */}
@@ -58,7 +68,7 @@ const UserList = () => {
             <p className='time'>Today, 8:56pm</p>
         </div>
         </div>
-        <Button className='button' variant="contained">+</Button>
+        <Button  className='button' variant="contained">+</Button>
         </div>
          )) 
     :
@@ -71,10 +81,10 @@ const UserList = () => {
         <div>
             <h5>{item.username.substring(0,14)}</h5>
             <p className='userTime'>Today, 8:56pm</p>
-            <div></div>
+            
         </div>
         </div>
-        <Button className='button' variant="contained">+</Button>
+        <Button onClick={()=>handleAddFriend(item)} className='button' variant="contained">+</Button>
    </div>
     ))}
     {/* more user */}
