@@ -71,11 +71,13 @@ const UserList = () => {
         <div>
             <h5>{item.username.substring(0,14)}</h5>
             <p className='userTime'>Today, 8:56pm</p>
+            <div></div>
         </div>
         </div>
         <Button className='button' variant="contained">+</Button>
    </div>
     ))}
+    {/* more user */}
     {/* more user */}
    </div>
 
