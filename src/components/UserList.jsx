@@ -12,6 +12,8 @@ const UserList = () => {
     let [allUser,setAllUser]=useState([])
     let [search,setSearch]=useState([])
     let [input,setInput]=useState("")
+    let [friendRequest,setFriendRequest]=useState([])
+    let [friend,setFriend]=useState([])
     let data=useSelector((state)=>state.sajib.value)
 
     useEffect(()=>{
@@ -25,7 +27,7 @@ const UserList = () => {
             })
             setAllUser(arr)
       });
-    },[])
+    },[]) 
     let handleSearch=(e)=>{
         setInput(e.target.value)
         let result= allUser.filter(item=>item.username.toLowerCase().includes(e.target.value.toLowerCase()))
@@ -38,8 +40,32 @@ const UserList = () => {
             senderId:data.uid,
             reciverName:item.username,
             reciverId:item.userid
-  });
+    });
     }
+
+    useEffect(()=>{
+         const friendRequestRef = ref(db, 'friendRequest/');
+         onValue(friendRequestRef, (snapshot) => {
+            let arr=[]
+         snapshot.forEach(item=>{
+            arr.push(item.val().reciverId+item.val().senderId);
+        })
+        setFriendRequest(arr)
+    });
+    },[])
+
+    useEffect(()=>{
+         const friendRef = ref(db, 'friend/');
+         onValue(friendRef, (snapshot) => {
+            let arr=[]
+         snapshot.forEach(item=>{
+            arr.push(item.val().reciverId+item.val().senderId);
+        })
+        setFriend(arr)
+    });
+    },[])
+    
+    
     
   return (
    <>
@@ -84,7 +110,17 @@ const UserList = () => {
             
         </div>
         </div>
-        <Button onClick={()=>handleAddFriend(item)} className='button' variant="contained">+</Button>
+        {
+        friend.includes(item.userid+data.uid) ||friend.includes(data.uid+item.userid)?
+        <Button  className='button' variant="contained">Friend</Button>
+        :
+         friendRequest.includes(item.userid+data.uid) ||friendRequest.includes(data.uid+item.userid)?
+            <Button  className='button' variant="contained">Padding</Button>
+            :
+
+          <Button onClick={()=>handleAddFriend(item)} className='button' variant="contained">+</Button>
+
+    } 
    </div>
     ))}
     {/* more user */}

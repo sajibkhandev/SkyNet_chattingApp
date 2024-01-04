@@ -3,26 +3,41 @@ import Button from '@mui/material/Button';
 import userProfile1 from '../assets/userProfile1.png'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, push, set, remove } from "firebase/database";
+import { useSelector } from 'react-redux';
 
 
 const FriendRequest = () => {
 
     const db = getDatabase();
     let [alldata,setAlldata]=useState([])
+    let data =useSelector((state)=>state.sajib.value)
+    
     useEffect(()=>{
         const friendRequestRef = ref(db, 'friendRequest/');
          onValue(friendRequestRef, (snapshot) => {
             let arr=[]
          snapshot.forEach(item=>{
-            arr.push(item.val())
-            setAlldata(arr)
+            if(data.uid==item.val().reciverId){
 
-         })
+                arr.push({...item.val(),id:item.key})
+            }
+        })
+        setAlldata(arr)
          
-});
+    });
 
     },[])
+   
+    let handleAccept=(item)=>{
+        set(push(ref(db, 'friend/')), {
+            ...item
+    }).then(()=>{
+        // console.log("done");
+        remove(ref(db, 'friendRequest/'+item.id))
+    })
+
+    }
   return (
     <>
     {/* Search portion */}
@@ -45,11 +60,11 @@ const FriendRequest = () => {
                     <div className='pain'>
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
                     <div>
-                        <h5>Friends Reunion</h5>
+                        <h5>{item.senderName}</h5>
                         <p>Hi Guys, Wassup!</p>
                     </div>
                     </div>
-                    <Button className='button button2' variant="contained">Accept</Button>
+                    <Button onClick={()=>handleAccept(item)} className='button button2' variant="contained">Accept</Button>
             </div>
         ))}
 
