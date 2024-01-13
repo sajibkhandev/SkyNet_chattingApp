@@ -67,7 +67,9 @@ const BlockedUsers = () => {
                         <p className='time'>Today, 8:56pm</p>
                     </div>
                     </div>
+                    {!item.blockby&&
                     <Button className='button button2' variant="contained">unblock</Button>
+                    }
             </div>
 
             ))
