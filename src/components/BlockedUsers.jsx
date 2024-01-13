@@ -39,6 +39,16 @@ const BlockedUsers = () => {
     });
 
     },[])
+    let handleUnblock=(item)=>{
+       set(push(ref(db, 'friend/')), {
+            senderName:item.block,
+            senderId:item.blockId,
+            reciverName:data.displayName,
+            reciverId:data.uid
+    }).then(()=>{
+        remove(ref(db,'block/'+item.id))
+    })
+    }
     
   return (
     <>
@@ -68,7 +78,7 @@ const BlockedUsers = () => {
                     </div>
                     </div>
                     {!item.blockby&&
-                    <Button className='button button2' variant="contained">unblock</Button>
+                    <Button onClick={()=>handleUnblock(item)} className='button button2' variant="contained">unblock</Button>
                     }
             </div>
 

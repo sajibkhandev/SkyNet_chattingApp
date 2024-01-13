@@ -15,9 +15,12 @@ const MyGroups = () => {
     </div>
    {/* Search portion */}
     <div className='box'>
-        <div className='commonHeading'>
+        <div className='commonHeading '>
             <h4>My Groups</h4>
-            <BsThreeDotsVertical />
+            {/* <BsThreeDotsVertical /> */}
+            {/* <Button className="" variant="contained">create</Button> */}
+            <h4 className='createGroup'>Create Group</h4>
+
         </div>
        <div className='scroll'>
         {/* more user */}
