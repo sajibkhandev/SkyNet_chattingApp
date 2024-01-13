@@ -14,6 +14,7 @@ const UserList = () => {
     let [input,setInput]=useState("")
     let [friendRequest,setFriendRequest]=useState([])
     let [friend,setFriend]=useState([])
+    let [block,setBlock]=useState([])
     let data=useSelector((state)=>state.sajib.value)
 
     useEffect(()=>{
@@ -64,6 +65,19 @@ const UserList = () => {
         setFriend(arr)
     });
     },[])
+
+    useEffect(()=>{
+         const blockRef = ref(db, 'block/');
+         onValue(blockRef, (snapshot) => {
+            let arr=[]
+         snapshot.forEach(item=>{
+            arr.push(item.val().blockId+item.val().blockbyId);
+            
+            
+        })
+        setBlock(arr)
+    });
+    },[])
     
     
     
@@ -111,6 +125,10 @@ const UserList = () => {
         </div>
         </div>
         {
+            block.includes(item.userid+data.uid || block.includes(data.uid+item.userid))?
+            <Button  className='button' variant="contained">Block</Button>
+            :
+
         friend.includes(item.userid+data.uid) ||friend.includes(data.uid+item.userid)?
         <Button  className='button' variant="contained">Friend</Button>
         :
@@ -121,6 +139,8 @@ const UserList = () => {
           <Button onClick={()=>handleAddFriend(item)} className='button' variant="contained">+</Button>
 
     } 
+    
+   
    </div>
     ))}
     {/* more user */}
