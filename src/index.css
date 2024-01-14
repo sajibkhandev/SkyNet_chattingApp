@@ -489,8 +489,8 @@ Home Page end
 .error {
     position: absolute;
     top: 102px;
-    right: 190px;
-    color: red;
+    right: 196px;
+    color: rgb(207, 17, 17);
     font-weight: 600;
 }
 

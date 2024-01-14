@@ -48,10 +48,6 @@ const MyGroups = () => {
     
     
   const handleClose = () => setOpen(false);
-
- 
-
-
   
   let handleGroupImage=(e)=>{
     let imageTake=e.target.files[0]
@@ -82,20 +78,19 @@ const MyGroups = () => {
     });
 
     }
-    
-
-    
   }
   useEffect(()=>{
      const groupRef = ref(db, 'group/');
          onValue(groupRef, (snapshot) => {
             let arr=[]
          snapshot.forEach(item=>{
-          arr.push({...item.val(),id:item.key});
+          if(item.val().adminId==data.uid){
+
+            arr.push({...item.val(),id:item.key});
+          }
             
         })
         setGroup(arr)
-         
     });
 
   },[])
