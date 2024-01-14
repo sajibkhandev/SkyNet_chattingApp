@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Button from '@mui/material/Button';
 import userProfile1 from '../assets/userProfile1.png'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { useSelector } from 'react-redux';
 
 
 const GroupsList = () => {
+    const db = getDatabase();
+    let data =useSelector((state)=>state.sajib.value)
+    let [group,setGroup]=useState([])
+      useEffect(()=>{
+     const groupRef = ref(db, 'group/');
+         onValue(groupRef, (snapshot) => {
+            let arr=[]
+         snapshot.forEach(item=>{
+          if(item.val().adminId!=data.uid){
+
+            arr.push({...item.val(),id:item.key});
+          }
+            
+        })
+        setGroup(arr)
+    });
+
+  },[])
+ 
   return (
       <>
       {/* Search portion */}
@@ -23,56 +44,20 @@ const GroupsList = () => {
         </div>
        <div className='scroll'>
         {/* more user */}
+        {group.map(item=>(
+
             <div className='main'>
                     <div className='pain'>
-                    <img src={userProfile1} alt=""  className='userProfileCommon'/>
+                    <img src={item.coverPhoto} alt=""  className='userProfileCommon'/>
                     <div>
-                        <h5>Friends Reunion</h5>
+                        <h5>{item.groupName}</h5>
                         <p>Hi Guys, Wassup!</p>
                     </div>
                     </div>
                     <Button className='button' variant="contained">Join</Button>
             </div>
-            <div className='main'>
-                    <div className='pain'>
-                    <img src={userProfile1} alt=""  className='userProfileCommon'/>
-                    <div>
-                        <h5>Friends Reunion</h5>
-                        <p>Hi Guys, Wassup!</p>
-                    </div>
-                    </div>
-                    <Button className='button' variant="contained">Join</Button>
-            </div>
-            <div className='main'>
-                    <div className='pain'>
-                    <img src={userProfile1} alt=""  className='userProfileCommon'/>
-                    <div>
-                        <h5>Friends Reunion</h5>
-                        <p>Hi Guys, Wassup!</p>
-                    </div>
-                    </div>
-                    <Button className='button' variant="contained">Join</Button>
-            </div>
-            <div className='main'>
-                    <div className='pain'>
-                    <img src={userProfile1} alt=""  className='userProfileCommon'/>
-                    <div>
-                        <h5>Friends Reunion</h5>
-                        <p>Hi Guys, Wassup!</p>
-                    </div>
-                    </div>
-                    <Button className='button' variant="contained">Join</Button>
-            </div>
-            <div className='main'>
-                    <div className='pain'>
-                    <img src={userProfile1} alt=""  className='userProfileCommon'/>
-                    <div>
-                        <h5>Friends Reunion</h5>
-                        <p>Hi Guys, Wassup!</p>
-                    </div>
-                    </div>
-                    <Button className='button' variant="contained">Join</Button>
-            </div>
+        ))}
+           
         {/* more user */}
        </div>
 
