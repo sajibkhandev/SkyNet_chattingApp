@@ -106,14 +106,14 @@ const Registration = () => {
       createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
         console.log(userCredential.user.uid);
         updateProfile(auth.currentUser, {
-          displayName: fullName, photoURL: "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
+          displayName: fullName, photoURL: "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=d27ca7cf-81ac-40df-b4e7-e31dfef469ce"
         }).then(() => {
           sendEmailVerification(auth.currentUser)
        .then(() => {
         set(ref(db, 'all user/'+userCredential.user.uid), {
           username: fullName,
           email: userCredential.user.email,
-          profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
+          profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=d27ca7cf-81ac-40df-b4e7-e31dfef469ce"
         });
           setEmail("")
           setPasswrd("")
@@ -147,7 +147,7 @@ const Registration = () => {
       set(ref(db, 'all user/' + result.user.uid), {
         username: result.user.displayName,
         email: result.user.email,
-        profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=11cd1a14-6db5-4e41-bc43-f6c9d12554bd"
+        profile_picture : "https://firebasestorage.googleapis.com/v0/b/skynet-47ca9.appspot.com/o/profileAvater.jpg?alt=media&token=d27ca7cf-81ac-40df-b4e7-e31dfef469ce"
       });
       navigate("/home")
       dispatch(loginData(result.user))

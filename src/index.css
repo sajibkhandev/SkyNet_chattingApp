@@ -341,6 +341,7 @@ Home Page start
     -moz-box-shadow: 0px 9px 10px 0px rgba(0, 0, 0, 0.09);
     box-shadow: 0px 9px 10px 0px rgba(0, 0, 0, 0.09);
     border: 0px;
+    cursor: pointer;
 }
 
 .userProfileCommon{
@@ -475,6 +476,25 @@ Home Page start
 /* ====================
 Home Page end
 ============ =========*/
+.groupName{
+    margin: 20px 0px !important; 
+    position: relative;
+}
+.groupCreate{
+    margin-left: 296px !important;
+    margin-top: 30px !important;
+    background: #5F35F5 !important;
+    color: white !important;
+}
+.error {
+    position: absolute;
+    top: 102px;
+    right: 190px;
+    color: red;
+    font-weight: 600;
+}
+
+
 
 
 
