@@ -4,6 +4,9 @@ import Group from '../components/Group';
 import Friend from '../components/Friend';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import userProfile1 from '../assets/userProfile1.png'
+import profileAvater from '../assets/profileAvater.jpg'
+import ModalImage from "react-modal-image";
+import { BsSendFill } from "react-icons/bs";
 
 
 const Message = () => {
@@ -22,20 +25,75 @@ const Message = () => {
           <div className='chatBox'>
             {/* profile start */}
             <div className='profile'>
-              <img src="" alt="" />
+             <div className='profileChild'>
+               <img src={userProfile1} alt="" />
               <div>
                 <h4>Swathi </h4>
-                <p>active</p>
+                <p>Online</p>
               </div>
-              <BsThreeDotsVertical  className=''/>
+             </div>
+              <BsThreeDotsVertical  className='threeDotIcon'/>
               
             </div>
             {/* profile end */}
-            {/* message start */}
+            {/* message left */}
             <div className='messageBox'>
-            
+             
+               <div className='masPre'>
+                <p className='masOne'>Hey There !</p>
+              </div>
+              <div className='masPre'>
+                <p className='masOne'>Hey There !</p>
+              </div>
+              <div className='masPre'>
+                <p className='masOne'>Hey There sdfsdfs!</p>
+             </div>
+             {/* message right*/}
+             {/* image left*/}
+             <div className='masPre'>
+                <ModalImage
+                small={profileAvater}
+                large={profileAvater}
+                alt="profileAvater"
+               />
+             </div> <div className='masPre'>
+                <ModalImage
+                small={profileAvater}
+                large={profileAvater}
+                alt="profileAvater"
+               />
+             </div>
+             
+
+             {/* image left*/}
+             <div className='masTwo '>
+               <div className='masPre masTwoPre'>
+                <p className='masOne masTwoBg'>Hey There !</p>
+              </div>
+              <div className='masPre masTwoPre'>
+                <p className='masOne masTwoBg'>Hey There !</p>
+              </div>
+              <div className='masPre masTwoPre'>
+                <p className='masOne masTwoBg'>Hey There sdfsdfs!</p>
+              </div>
+              <div className='masPre masTwoPre'>
+                <p className='masOne masTwoBg'>Hey There sdfsdfssdfsdfsfsf!</p>
+              </div>
+              <div className='masPre masTwoImgBg masTwoPre'>
+                <ModalImage
+                small={profileAvater}
+                large={profileAvater}
+                alt="profileAvater"
+               />
+              </div>
+             </div>
             </div>
-            {/* message end */}
+            {/* message right */}
+
+            <div className='sendMag'>
+              <input type="text" />
+              <div className='sendButton'><BsSendFill /></div>
+            </div>
             
 
           </div>
