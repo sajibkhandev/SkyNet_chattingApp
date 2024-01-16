@@ -63,12 +63,21 @@ const Friend = () => {
             id:item.senderId,
             user:item.senderName
          }))
+        //  localStorage.setItem('userData',JSON.stringify({
+        //     id:item.senderId,
+        //     user:item.senderName
+        //  }))
 
         }else{
             dispatch(activeUsers({
             id:item.reciverId,
             user:item.reciverName
          }))
+        //   localStorage.setItem('userData',JSON.stringify({
+        //     id:item.reciverId,
+        //     user:item.reciverName
+        //  }))
+
 
         }
        

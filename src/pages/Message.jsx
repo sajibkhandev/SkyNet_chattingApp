@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Grid from '@mui/material/Grid';
 import Group from '../components/Group';
 import Friend from '../components/Friend';
@@ -8,13 +8,28 @@ import profileAvater from '../assets/profileAvater.jpg'
 import ModalImage from "react-modal-image";
 import { BsSendFill } from "react-icons/bs";
 import { useSelector } from 'react-redux';
+import { getDatabase, push, ref, set } from "firebase/database";
 
 
 const Message = () => {
+  let [send,setSend]=useState("")
+   const db = getDatabase();
 
-   let data1=useSelector((state)=>state.active.active)
-   console.log(data1.user);
+   let data1=useSelector((state)=>state.active.man)
+   let data=useSelector((state)=>state.sajib.value)
    
+
+   let handleSendButton=()=>{
+    set(push(ref(db, 'message/' )), {
+      message:send,
+      id:data.uid,
+      name:data.displayName
+   
+  }).then(()=>{
+    console.log("dsal");
+    setSend("")
+  });
+   }
     
   return (
      <Grid container spacing={2}>
@@ -34,7 +49,7 @@ const Message = () => {
              <div className='profileChild'>
                <img src={userProfile1} alt="" />
               <div>
-                <h4>{data1.user}</h4>
+                <h4>Tamim</h4>
                 <p>Online</p>
               </div>
              </div>
@@ -97,8 +112,8 @@ const Message = () => {
             {/* message right */}
 
             <div className='sendMag'>
-              <input type="text" />
-              <div className='sendButton'><BsSendFill /></div>
+              <input type="text" value={send} onChange={((e)=>setSend(e.target.value))}/>
+              <div onClick={handleSendButton} className='sendButton'><BsSendFill /></div>
             </div>
             
 

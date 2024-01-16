@@ -3,12 +3,14 @@ import { createSlice } from '@reduxjs/toolkit'
 export const activeSlice = createSlice({
   name: 'actives',
   initialState: {
-    man:"sajib",
+    man:null,
   },
   reducers: {
     activeUsers: (state,action) => {
-      state.active=action.payload
-    // console.log(action.payload);
+      state.man=action.payload
+      
+      
+    
      
       
     },
