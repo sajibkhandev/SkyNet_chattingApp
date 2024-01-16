@@ -4,11 +4,16 @@ import userProfile1 from '../assets/userProfile1.png'
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
 import { getDatabase, onValue, push, ref, remove, set } from "firebase/database";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { activeUsers } from '../slices/activeSlice';
+
 
 const Friend = () => {
     const db = getDatabase();
     let data=useSelector((state)=>state.sajib.value)
+   
+    let dispatch=useDispatch()
+    console.log();
     let [friend,setFriend]=useState([])
     useEffect(()=>{
          const friendRef = ref(db, 'friend/');
@@ -51,6 +56,23 @@ const Friend = () => {
         }
 
     }
+    let handleChatMassage=(item)=>{
+        
+        if(data.uid==item.reciverId){
+            dispatch(activeUsers({
+            id:item.senderId,
+            user:item.senderName
+         }))
+
+        }else{
+            dispatch(activeUsers({
+            id:item.reciverId,
+            user:item.reciverName
+         }))
+
+        }
+       
+    }
   return (
     <>
    {/* Search portion */}
@@ -69,7 +91,7 @@ const Friend = () => {
         {/* more user */}
         {friend.map(item=>(
 
-            <div className='main'>
+            <div onClick={()=>handleChatMassage(item)} className='main'>
                     <div className='pain'>
                     <img src={userProfile1} alt=""  className='userProfileCommon'/>
                     <div>

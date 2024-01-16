@@ -7,9 +7,15 @@ import userProfile1 from '../assets/userProfile1.png'
 import profileAvater from '../assets/profileAvater.jpg'
 import ModalImage from "react-modal-image";
 import { BsSendFill } from "react-icons/bs";
+import { useSelector } from 'react-redux';
 
 
 const Message = () => {
+
+   let data1=useSelector((state)=>state.active.active)
+   console.log(data1.user);
+   
+    
   return (
      <Grid container spacing={2}>
       
@@ -28,7 +34,7 @@ const Message = () => {
              <div className='profileChild'>
                <img src={userProfile1} alt="" />
               <div>
-                <h4>Swathi </h4>
+                <h4>{data1.user}</h4>
                 <p>Online</p>
               </div>
              </div>
