@@ -15,8 +15,11 @@ const Message = () => {
   let [send,setSend]=useState("")
    const db = getDatabase();
 
-   let data1=useSelector((state)=>state.active.man)
    let data=useSelector((state)=>state.sajib.value)
+   let data1=useSelector((state)=>state.active.man)
+  
+   
+   
    
 
    let handleSendButton=()=>{
@@ -49,7 +52,7 @@ const Message = () => {
              <div className='profileChild'>
                <img src={userProfile1} alt="" />
               <div>
-                <h4>Tamim</h4>
+                <h4>{data1.user}</h4>
                 <p>Online</p>
               </div>
              </div>

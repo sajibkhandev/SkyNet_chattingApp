@@ -13,7 +13,7 @@ const Friend = () => {
     let data=useSelector((state)=>state.sajib.value)
    
     let dispatch=useDispatch()
-    console.log();
+    
     let [friend,setFriend]=useState([])
     useEffect(()=>{
          const friendRef = ref(db, 'friend/');
@@ -63,20 +63,20 @@ const Friend = () => {
             id:item.senderId,
             user:item.senderName
          }))
-        //  localStorage.setItem('userData',JSON.stringify({
-        //     id:item.senderId,
-        //     user:item.senderName
-        //  }))
+         localStorage.setItem('userData',JSON.stringify({
+            id:item.senderId,
+            user:item.senderName
+         }))
 
         }else{
             dispatch(activeUsers({
             id:item.reciverId,
             user:item.reciverName
          }))
-        //   localStorage.setItem('userData',JSON.stringify({
-        //     id:item.reciverId,
-        //     user:item.reciverName
-        //  }))
+          localStorage.setItem('userData',JSON.stringify({
+            id:item.reciverId,
+            user:item.reciverName
+         }))
 
 
         }
@@ -109,7 +109,7 @@ const Friend = () => {
                     </div>
                     </div>
                     {/* <p className='time'>Today, 8:56pm</p> */}
-                    <Button  className='button button2' variant="contained"></Button>
+                    <Button  className='button button2' variant="contained">Massage</Button>
             </div>
         ))}
         {/* more user */}
