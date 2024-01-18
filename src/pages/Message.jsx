@@ -32,7 +32,7 @@ const Message = () => {
       senderName:data.displayName,
       senderId:data.uid,
       reciverName:data1.user,
-      reciverId:data.uid,
+      reciverId:data1.id,
       
    
   }).then(()=>{
@@ -47,19 +47,22 @@ const Message = () => {
    }
 
    useEffect(()=>{
-    const groupRef = ref(db, 'message/');
-         onValue(groupRef, (snapshot) => {
+    const messageRef = ref(db, 'message/');
+         onValue(messageRef, (snapshot) => {
             let arr=[]
          snapshot.forEach(item=>{
-          console.log(item.val());
-          
+          if((item.val().senderId==data.uid && item.val().reciverId==data1.id)||
+          (item.val().reciverId==data.uid && item.val().senderId==data1.id)){
+            arr.push(item.val())
+          }
             
         })
-        // setMessage(arr)
+        setMessage(arr)
     });
 
 
    },[])
+   console.log(message);
    
     
   return (
@@ -92,20 +95,28 @@ const Message = () => {
 
             <div className='messageBox'>
             {/* message left start */}
+            {
+              message.map(item=>(
+                item.reciverId==data.uid?
+                <div className='masPre'>
+                <p className='masOne'>{item.message}</p>
+              </div>
+              :
+              <div className='masTwo '>
+                <div className='masPre masTwoPre'>
+                <p className='masOne masTwoBg'>{item.message}</p>
+              </div>
+              
+               </div>
+              ))
+            }
              
-               <div className='masPre'>
-                <p className='masOne'>Hey There !</p>
-              </div>
-              <div className='masPre'>
-                <p className='masOne'>Hey There !</p>
-              </div>
-              <div className='masPre'>
-                <p className='masOne'>Hey There sdfsdfs!</p>
-             </div>
+               
+              
              {/* message left end */}
              
              {/* image left start */}
-             <div className='masPre'>
+             {/* <div className='masPre'>
                 <ModalImage
                 small={profileAvater}
                 large={profileAvater}
@@ -118,12 +129,21 @@ const Message = () => {
                 large={profileAvater}
                 alt="profileAvater"
                />
-             </div>
+             </div> */}
              {/* image left end */}
 
              <div className='masTwo '>
              {/* massage right start */}
-               <div className='masPre masTwoPre'>
+             {/* {
+              message.map(item=>(
+                item.reciverId==data1.id &&
+                <div className='masPre'>
+                <p className='masOne'>{item.message}</p>
+              </div>
+
+              ))
+            } */}
+               {/* <div className='masPre masTwoPre'>
                 <p className='masOne masTwoBg'>Hey There !</p>
               </div>
               <div className='masPre masTwoPre'>
@@ -134,18 +154,18 @@ const Message = () => {
               </div>
               <div className='masPre masTwoPre'>
                 <p className='masOne masTwoBg'>Hey There sdfsdfssdfsdfsfsf!</p>
-              </div>
+              </div> */}
               {/* massage right end */}
 
               {/* image right start */}
               
-              <div className='masPre masTwoImgBg masTwoPre'>
+              {/* <div className='masPre masTwoImgBg masTwoPre'>
                 <ModalImage
                 small={profileAvater}
                 large={profileAvater}
                 alt="profileAvater"
                />
-              </div>
+              </div> */}
              </div>
             {/* image right end*/}
             </div>
