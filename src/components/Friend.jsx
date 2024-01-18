@@ -61,21 +61,25 @@ const Friend = () => {
         if(data.uid==item.reciverId){
             dispatch(activeUsers({
             id:item.senderId,
-            user:item.senderName
+            user:item.senderName,
+            status:"single"
          }))
          localStorage.setItem('userData',JSON.stringify({
             id:item.senderId,
-            user:item.senderName
+            user:item.senderName,
+            status:"single"
          }))
 
         }else{
             dispatch(activeUsers({
             id:item.reciverId,
-            user:item.reciverName
+            user:item.reciverName,
+            status:"single"
          }))
           localStorage.setItem('userData',JSON.stringify({
             id:item.reciverId,
-            user:item.reciverName
+            user:item.reciverName,
+            status:"single"
          }))
 
 
